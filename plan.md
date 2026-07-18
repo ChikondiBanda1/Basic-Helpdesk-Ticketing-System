@@ -1,10 +1,10 @@
 # Build Plan: Basic Helpdesk Ticketing System
 
 ## Project Goal
-Build a simple, working end-to-end helpdesk ticketing web application. Users can submit support tickets; agents can view, assign, update, and resolve them. This is a portfolio project intended to demonstrate REST API design, database modeling, and full-stack integration.
+Build a simple, working end-to-end helpdesk ticketing web application. Users can submit support tickets; agents can view, assign, update, and resolve them. This is a portfolio project intended to demonstrate CI/CD pipelines, REST API design, database modeling, and full-stack integration.
 
 ## Tech Stack
-- **Backend:** Python 3.x, Flask
+- **Backend:** Python + Flask
 - **Database:** PostgreSQL
 - **ORM:** SQLAlchemy (Flask-SQLAlchemy)
 - **Frontend:** HTML, CSS, JavaScript (vanilla — no frontend framework)
@@ -76,10 +76,9 @@ Build a simple, working end-to-end helpdesk ticketing web application. Users can
 - User authentication / roles
 - Multi-tenant support
 - File attachments on tickets
-- Production deployment / hosting
 
 ## Deliverables
 - Working local app (backend + frontend)
-- README.md with setup instructions
 - Clean git history with meaningful commits
-- (Optional) CI pipeline via GitHub Actions
+- CI/CD pipeline
+- Production deployment / hosting
