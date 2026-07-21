@@ -1,15 +1,56 @@
-# Build Plan: Basic Helpdesk Ticketing System
+# Project Plan: Basic Helpdesk Ticketing System
 
 ## Project Goal
 Build a simple, working end-to-end helpdesk ticketing web application. Users can submit support tickets; agents can view, assign, update, and resolve them. This is a portfolio project intended to demonstrate CI/CD pipelines, REST API design, database modeling, and full-stack integration.
 
+## Stakeholders
+- **Customers** — end users of a SaaS company who need to file complaints, ask for help, or ask questions.
+- **Support officers** — the company's internal support staff who work on the tickets: giving status updates, resolving issues, and escalating where needed.
+
+## Use Cases
+**As a customer, I want to:**
+- File a complaint
+- Ask for help
+- Ask a question
+
+**As a support officer, I want to:**
+- Record status updates on a ticket
+- Give the customer updates
+- Resolve issues
+- Escalate an issue to another layer/tier of support when I can't resolve it myself
+
+## Business Components
+|Component | Used by | Purpose |
+|---|---|---|
+|Ticket submission | Customer | Where a customer files a complaint, help request, or question |
+|Ticket status view | Customer	| Where a customer checks progress on their open tickets |
+|Ticket update / resolution | Support officer | Where an officer changes status, adds notes, and resolves a ticket |
+|Support ↔ client chat | Both | Live conversation thread attached to each ticket |
+
+## Other core features
+- Ticket CRUD (submit/view/update/resolve)
+- Instant messaging via WebSockets
+- Ticket categories/tags — e.g. billing, technical, account 
+- Email notifications — customer gets emailed on status change or new reply
+- Customer satisfaction rating — quick thumbs-up/down after resolution
+
+## Pages / Views (by role)
+**Customer-facing:**
+- Submit a ticket (title, description, priority)
+- My tickets — list + status
+- Ticket detail — status + live chat with support
+
+**Support-officer-facing:**
+- Ticket queue — all open/assigned tickets, filterable by status/priority
+- Ticket detail — status/priority controls, resolve button, live chat with customer
+
 ## Tech Stack
 - **Backend:** Python + Flask
+- **Real-time messaging:** Flask-SocketIO
 - **Database:** PostgreSQL
 - **ORM:** SQLAlchemy (Flask-SQLAlchemy)
 - **Frontend:** HTML, CSS, JavaScript (vanilla — no frontend framework)
 - **API style:** RESTful JSON endpoints
-- **Environment/config:** `.env` file for DB credentials (never commit secrets)
 
 ## Core Entities
 
@@ -74,8 +115,10 @@ Build a simple, working end-to-end helpdesk ticketing web application. Users can
 
 ## Non-Goals (out of scope for v1)
 - User authentication / roles
-- Multi-tenant support
-- File attachments on tickets
+- Multi-tenant support (multiple SaaS companies on one instance)
+- File attachments on tickets/messages
+- Escalation tiers / ticket reassignment between officers
+- Typing indicators, read receipts, or other chat-app polish
 
 ## Deliverables
 - Working local app (backend + frontend)
