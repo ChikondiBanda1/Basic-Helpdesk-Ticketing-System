@@ -23,9 +23,15 @@ Build a simple, working end-to-end helpdesk ticketing web application. Users can
 |Component | Used by | Purpose |
 |---|---|---|
 |Ticket submission | Customer | Where a customer files a complaint, help request, or question |
-|Ticket status view | Customer	| Where a customer checks progress on their open tickets |
+|Ticket status view | Customer | Where a customer checks progress on their open tickets |
+|Ticket queue (per type) | Support officer | Where officers see open tickets in their type's queue and self-assign one to work |
 |Ticket update / resolution | Support officer | Where an officer changes status, adds notes, and resolves a ticket |
-|Support ↔ client chat | Both | Live conversation thread attached to each ticket |
+|Support ↔ client chat | Both | Live conversation thread attached to each ticket, with a human support officer (not an AI agent) |
+
+## Queue Behavior & Ticket Types (v1)
+- Tickets are split into two types — **complaint** and **question** — kept in separate queues.
+- Officers self-assign: there's no automatic routing of a ticket to a specific officer in v1. 
+- No formal SLA or guaranteed response time in v1. Officers work through their queue in priority order (high → medium → low); marking a ticket "high priority" moves it up the queue, it doesn't let a customer skip the queue.
 
 ## Other core features
 - Ticket CRUD (submit/view/update/resolve)
@@ -61,6 +67,7 @@ Build a simple, working end-to-end helpdesk ticketing web application. Users can
 | title | string | required |
 | description | text | required |
 | priority | enum | low / medium / high |
+| type | enum | complaint / question — determines which queue the ticket appears in |
 | status | enum | open / in_progress / resolved |
 | assignee | string, nullable | agent name/id |
 | created_at | timestamp | auto-set on creation |
@@ -112,6 +119,7 @@ Build a simple, working end-to-end helpdesk ticketing web application. Users can
    - Basic auth (login for agents)
    - Email notification stub on status change
    - GitHub Actions CI (lint + run tests on push)
+   - Auto-categorization of ticket type and routing to a specific officer's queue
 
 ## Non-Goals (out of scope for v1)
 - User authentication / roles
@@ -119,9 +127,9 @@ Build a simple, working end-to-end helpdesk ticketing web application. Users can
 - File attachments on tickets/messages
 - Escalation tiers / ticket reassignment between officers
 - Typing indicators, read receipts, or other chat-app polish
+- Automatic ticket categorization and routing to a specific officer's queue
+- Formal SLA / guaranteed response-time tracking
+- AI-assisted triage or chat agents (chat is human-to-human in v1)
 
 ## Deliverables
 - Working local app (backend + frontend)
-- Clean git history with meaningful commits
-- CI/CD pipeline
-- Production deployment / hosting
